@@ -1,0 +1,38 @@
+#title {
+	text-align: center;
+}
+#image {
+	display: block;
+	height: auto;
+	max-width: 90%;
+	margin: auto;
+}
+#img-div {
+	padding: 1em 5px 5px;
+	border: 1px solid black;
+	background-color: rgba(0,0,0,0.05);
+}
+#img-caption {
+	width: 664px;
+	max-width: 90%;
+	margin: 1em auto;
+	text-align: center;
+	font-size: 0.9em;
+}
+#tribute-info {
+	line-height: 1.5;
+	padding: 0 1em;
+}
+#tribute-info::first-letter {
+	font-size: 1.5em;
+}
+#tribute-link-parent {
+	text-align: right;
+}
+#tribute-link {
+	display: inline-block;
+	padding: 1em;
+	background-color: rgba(0,0,0,0.1);
+	border-radius: 1em;
+	text-decoration: none;
+}
