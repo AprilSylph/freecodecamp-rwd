@@ -1,0 +1,109 @@
+:root {
+	background-color: #bfeeb7;
+}
+
+body {
+	line-height: 1.5;
+	max-width: 1000px;
+	margin: 2em auto;
+}
+
+h1, p {
+	padding: 0 2rem;
+}
+
+form {
+	background-color: #255f53;
+	padding: 0 2em;
+	border: 1px solid transparent;
+	border-radius: 2em;
+	margin-top: 2em;
+}
+
+fieldset, button {
+	margin: 2em 0;
+}
+
+div {
+	padding-left: 1em;
+	margin: 1em 0;
+}
+
+fieldset {
+	background-color: #feed9f;
+	border: none;
+	border-radius: 1em;
+}
+
+legend {
+	font-weight: bold;
+	background-color: #df852d;
+	padding: 1ch 1em;
+	border-radius: 1em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select, textarea {
+	display: block;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	vertical-align: text-bottom;
+	margin-right: 1ch;
+}
+
+select {
+	padding: 0.5em;
+}
+
+textarea {
+	width: calc(100% - 2em);
+	background-color: #fffae4;
+	padding: 1em;
+	border: none;
+	border-radius: 1em;
+	resize: none;
+}
+
+button {
+	display: block;
+	background-color: #ffcf00;
+	font-weight: bold;
+	width: 100%;
+	border: none;
+	border-radius: 2em;
+	padding: 1em;
+}
+
+.basic label {
+	display: block;
+	margin: 1ch 0;
+}
+
+.required {
+	font-size: 0.75em;
+	vertical-align: middle;
+	opacity: 0.75;
+	margin-left: 1ch;
+}
+
+.basic input {
+	min-height: 2em;
+	min-width: 250px;
+	background-color: #fffae4;
+	padding: 1ch 1em;
+	border: none;
+	border-radius: 1em;
+}
+
+.radios label {
+	margin-right: 1em;
+}
+
+.checkboxes label {
+	display: block;
+	padding: 0.5ch 0;
+}

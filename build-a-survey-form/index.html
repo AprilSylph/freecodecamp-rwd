@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="index.css">
+		<title>Survey Form</title>
+	</head>
+	<body>
+		<h1 id="title">Deserted Island Getaway Package Survey</h1>
+		<p id="description">
+			Nook Inc. would like your honest and valuable opinion, yes yes!
+		</p>
+		<form id="survey-form">
+			<fieldset class="basic">
+				<legend>Basic Information</legend>
+				<div>
+					<label for="name" id="name-label">Name <span class="required">(required)</span></label>
+					<input type="text" id="name" name="name" placeholder="Enter your name" required/>
+				</div>
+				<div>
+					<label for="email" id="email-label">Email Address <span class="required">(required)</span></label>
+					<input type="email" id="email" name="email" placeholder="Enter your email address" required/>
+				</div>
+				<div>
+					<label for="number" id="number-label">Age</label>
+					<input type="number" id="number" name="number" placeholder="Enter your age" min="3" max="100"/>
+				</div>
+			</fieldset>
+			<fieldset class="options">
+				<legend>How satisfied would you say you are with your new island life?</legend>
+				<div>
+					<select id="dropdown" name="feedback">
+						<option value="not">Not Satisfied</option>
+						<option value="slightly">Slightly Satisfied</option>
+						<option value="medium" selected>Satisfied</option>
+						<option value="very">Very Satisfied</option>
+						<option value="extremely">Extremely Satisfied</option>
+					</select>
+				</div>
+			</fieldset>
+			<fieldset class="radios">
+				<legend>Are you the Resident Representative on your island?</legend>
+				<div>
+					<label><input type="radio" name="is-rep" value="true" checked/>Yes</label>
+					<label><input type="radio" name="is-rep" value="false"/>No</label>
+				</div>
+			</fieldset>
+			<fieldset class="checkboxes">
+				<legend>Which personality types currently live on your island?</legend>
+				<div>
+					<label><input type="checkbox" name="personality" value="cranky"/>Cranky</label>
+					<label><input type="checkbox" name="personality" value="jock"/>Jock</label>
+					<label><input type="checkbox" name="personality" value="lazy"/>Lazy</label>
+					<label><input type="checkbox" name="personality" value="smug"/>Smug</label>
+					<label><input type="checkbox" name="personality" value="normal"/>Normal</label>
+					<label><input type="checkbox" name="personality" value="peppy"/>Peppy</label>
+					<label><input type="checkbox" name="personality" value="snooty"/>Snooty</label>
+					<label><input type="checkbox" name="personality" value="sisterly"/>Sisterly</label>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>Any other comments?</legend>
+				<textarea name="comment" rows="8"></textarea>
+			</fieldset>
+			<button id="submit" type="submit">Submit this form</button>
+		</form>
+	</body>
+	<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
