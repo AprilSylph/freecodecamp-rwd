@@ -1,0 +1,51 @@
+body {
+	padding-top: 5em;
+	margin: 0;
+}
+header {
+	height: 5em;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #ddd;
+}
+header img {
+	height: calc(100% - 2ch);
+	width: auto;
+	margin: 1ch;
+}
+header nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+header nav a {
+	color: black;
+	font-weight: bold;
+	text-decoration: none;
+	margin: 1ch;
+	padding: 1em;
+}
+header nav a:hover {
+	background-color: #eee;
+	border-radius: 3px;
+}
+main:not(#default):not(:target),
+main:target ~ #default {
+	display: none;
+}
+main {
+	margin: 1em 0;
+}
+main > * {
+	display: block;
+	margin: 0 auto;
+}
+#warning {
+	color: red;
+	font-weight: bold;
+}

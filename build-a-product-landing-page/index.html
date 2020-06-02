@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aperture Turrets</title>
+		<link rel="stylesheet" href="index.css">
+		<style>
+			main {
+				display: flex;
+			}
+			@media only screen and (orientation: landscape) {
+				#video {
+					max-width: 1280px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header id="header">
+			<img src="logo.png" alt="" id="header-img">
+			<nav id="nav-bar">
+				<a href="#demo" class="nav-link">Demo</a>
+				<a href="#subscribe" class="nav-link">Subscribe</a>
+				<a href="#secret" class="nav-link">???</a>
+			</nav>
+		</header>
+		<main id="demo">
+			<iframe id="video" width="1280" height="720" src="https://www.youtube.com/embed/6i-nMWgBUp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</main>
+		<main id="subscribe">
+			<form id="form" action="https://www.freecodecamp.com/email-submit">
+				<fieldset>
+					<legend>Subscribe for news!</legend>
+					<input type="email" name="email" id="email" placeholder="Enter your email address" required/>
+					<input type="submit" id="submit"/>
+				</fieldset>
+			</form>
+		</main>
+		<main id="secret">
+			<p id="warning">WARNING: Turrets should never be flipped onto their side. Don't ask me why, I don't know!</p>
+		</main>
+		<main id="default">
+			<p>Welcome to my scam, I mean, sales pitch! Heh heh. Use the navigation above to get started.</p>
+		</main>
+	</body>
+	<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
