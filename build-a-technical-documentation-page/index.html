@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Using Promises</title>
+		<style>
+			body {
+				margin: 0;
+				display: flex;
+				flex-direction: row-reverse;
+			}
+			@media only screen and (orientation: portrait) {
+				body {
+					flex-direction: column-reverse;
+				}
+			}
+			main, nav {
+				padding: 1em;
+			}
+			main {
+				max-height: calc(100vh - 2em);
+				overflow-y: scroll;
+			}
+			nav {
+				min-width: 20vw;
+			}
+			nav a {
+				display: block;
+				margin: 1em 0;
+			}
+		</style>
+	</head>
+	<body>
+		<main id="main-doc">
+			<section id="Introduction" class="main-section">
+				<header><h1>Introduction</h1></header>
+				<p>
+					A <code>Promise</code> is an object representing the eventual completion or failure of an asynchronous operation. Since most people are consumers of already-created promises, this guide will explain consumption of returned promises before explaining how to create them.
+				</p>
+				<p>
+					Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function.
+				</p>
+			</section>
+			<section id="Chaining" class="main-section">
+				<header><h1>Chaining</h1></header>
+				<p>
+					A common need is to execute two or more asynchronous operations back to back, where each subsequent operation starts when the previous operation succeeds, with the result from the previous step. We accomplish this by creating a <strong>promise chain</strong>.
+				</p>
+				<p>
+					Here's the magic: the <code>then()</code> function returns a new promise, different from the original:
+				</p>
+				<pre>
+const promise = doSomething();
+const promise2 = promise.then(successCallback, failureCallback);
+				</pre>
+				<p>or</p>
+				<pre>
+const promise2 = doSomething().then(successCallback, failureCallback);
+				</pre>
+				<p>
+					This second promise (<code>promise2</code>) represents the completion not just of <code>doSomething()</code>, but also of the <code>successCallback</code> or <code>failureCallback</code> you passed in, which can be other asynchronous functions returning a promise. When that's the case, any callbacks added to <code>promise2</code> get queued behind the promise returned by either <code>successCallback</code> or <code>failureCallback</code>.
+				</p>
+				<p>
+					Basically, each promise represents the completion of another asynchronous step in the chain.
+				</p>
+				<p>
+					In the old days, doing several asynchronous operations in a row would lead to the classic callback pyramid of doom:
+				</p>
+				<pre>
+doSomething(function(result) {
+  doSomethingElse(result, function(newResult) {
+    doThirdThing(newResult, function(finalResult) {
+      console.log('Got the final result: ' + finalResult);
+    }, failureCallback);
+  }, failureCallback);
+}, failureCallback);
+				</pre>
+				<p>
+					With modern functions, we attach our callbacks to the returned promises instead, forming a promise chain:
+				</p>
+				<pre>
+doSomething()
+.then(result => doSomethingElse(result))
+.then(newResult => doThirdThing(newResult))
+.then(finalResult => {
+  console.log(`Got the final result: ${finalResult}`);
+})
+.catch(failureCallback);
+				</pre>
+			</section>
+			<section id="Error_propagation" class="main-section">
+				<header><h1>Error propagation</h1></header>
+				<p>
+					You might recall seeing <code>failureCallback</code> three times in the pyramid of doom earlier, compared to only once at the end of the promise chain. If there's an exception, the browser will look down the chain for <code>.catch()</code> handlers or <code>onRejected</code>. This is very much modeled after how synchronous code works:
+				</p>
+				<pre>
+try {
+  const result = syncDoSomething();
+  const newResult = syncDoSomethingElse(result);
+  const finalResult = syncDoThirdThing(newResult);
+  console.log(`Got the final result: ${finalResult}`);
+} catch (error) {
+  failureCallback(error);
+}
+				</pre>
+				<p>
+					Promises solve a fundamental flaw with the callback pyramid of doom, by catching all errors, even thrown exceptions and programming errors. This is essential for functional composition of asynchronous operations.
+				</p>
+			</section>
+			<section id="Creating_a_Promise_around_an_old_callback_API" class="main-section">
+				<header><h1>Creating a Promise around an old callback API</h1></header>
+				<p>
+					A <code>Promise</code> can be created from scratch using its constructor. This should be needed only to wrap old APIs.
+				</p>
+				<p>
+					In an ideal world, all asynchronous functions would already return promises. Unfortunately, some APIs still expect success and/or failure callbacks to be passed in the old way. The most obvious example is the <code>setTimeout()</code> function:
+				</p>
+				<pre>
+setTimeout(() => saySomething("10 seconds passed"), 10*1000);
+				</pre>
+				<p>
+					Mixing old-style callbacks and promises is problematic. If <code>saySomething()</code> fails or contains a programming error, nothing catches it. <code>setTimeout</code> is to blame for this.
+				</p>
+				<p>
+					Luckily we can wrap <code>setTimeout</code> in a promise. Best practice is to wrap problematic functions at the lowest possible level, and then never call them directly again:
+				</p>
+				<pre>
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+wait(10*1000).then(() => saySomething("10 seconds")).catch(failureCallback);
+				</pre>
+				<p>
+					Basically, the promise constructor takes an executor function that lets us resolve or reject a promise manually. Since <code>setTimeout()</code> doesn't really fail, we left out reject in this case.
+				</p>
+			</section>
+			<section id="See_also" class="main-section">
+				<header><h1>See also</h1></header>
+				<ul>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then"><code>Promise.then()</code></a></li>
+					<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"><code>async/await</code></a></li>
+					<li><a href="http://promisesaplus.com/">Promises/A+ specification</a></li>
+					<li><a href="https://medium.com/@ramsunvtech/promises-of-promise-part-1-53f769245a53">Venkatraman.R - JS Promise (Part 1, Basics)</a></li>
+					<li><a href="https://medium.com/@ramsunvtech/js-promise-part-2-q-js-when-js-and-rsvp-js-af596232525c#.dzlqh6ski">Venkatraman.R - JS Promise (Part 2 - Using Q.js, When.js and RSVP.js)</a></li>
+					<li><a href="https://tech.io/playgrounds/11107/tools-for-promises-unittesting/introduction">Venkatraman.R - Tools for Promises Unit Testing</a></li>
+					<li><a href="http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html">Nolan Lawson: We have a problem with promises — Common mistakes with promises</a></li>
+				</ul>
+			</section>
+			<section id="Credit" class="main-section">
+				<header><h1>Credit</h1></header>
+				<p>
+					All information on this page is from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">Using Promises - JavaScript | MDN</a>.
+				</p>
+			</section>
+		</main>
+		<nav id="navbar">
+			<header><h1>Using Promises</h1></header>
+			<a href="#Introduction" class="nav-link">Introduction</a>
+			<a href="#Chaining" class="nav-link">Chaining</a>
+			<a href="#Error_propagation" class="nav-link">Error propagation</a>
+			<a href="#Creating_a_Promise_around_an_old_callback_API" class="nav-link">Creating a Promise around an old callback API</a>
+			<a href="#See_also" class="nav-link">See also</a>
+			<a href="#Credit" class="nav-link">Credit</a>
+		</nav>
+	</body>
+	<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
