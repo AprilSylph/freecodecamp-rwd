@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>April Sylph</title>
+		<style>
+			nav {
+				position: fixed;
+				top: 0;
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+				height: 50px;
+				width: calc(100% - 16px);
+			}
+			nav a {
+				line-height: 50px;
+				padding: 0 1em;
+			}
+			#welcome-section {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: calc(100vh - 50px);
+				padding-top: 50px;
+				text-align: center;
+			}
+			@media only screen and (orientation: landscape) {
+				.project-tiles {
+					display: flex;
+					flex-direction: row;
+				}
+				.project-tile {
+					flex-basis: calc(25vw - 16px - 4em);
+				}
+			}
+			.project-tile {
+				border: 1px solid black;
+				padding: 0 1em;
+				margin: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<nav id="navbar">
+			<a href="#profile">Profile</a>
+			<a href="#projects">Projects</a>
+		</nav>
+		<section id="welcome-section">
+			<div>
+				<h1>April Sylph</h1>
+				<h3>Web Developer and JavaScript Engineer</h3>
+				<a href="https://github.com/AprilSylph" target="_blank" id="profile-link">GitHub:AprilSylph</a>
+			</div>
+		</section>
+		<section id="profile">
+			<header><h2>Profile</h2></header>
+			<p>
+				I am a JavaScript engineer based in the UK, with experience in working in a team and catering to a large userbase. I enjoy doing both the actual programming needed to drive a project and the repository housekeeping necessary to help others maintain it. I take an “inbox zero” approach to my work, easily becoming laser-focused on the task at hand.
+			</p>
+		</section>
+		<section id="projects">
+			<header><h2>Projects</h2></header>
+			<div class="project-tiles">
+				<div class="project-tile">
+					<h3><a href="https://github.com/AprilSylph/Vision">Vision</a></h3>
+					<p>My first and most popular theme at over 100 users.</p>
+				</div>
+				<div class="project-tile">
+					<h3><a href="https://github.com/AprilSylph/Printed">Printed</a></h3>
+					<p>My most responsive theme.</p>
+				</div>
+				<div class="project-tile">
+					<h3><a href="https://github.com/AprilSylph/JSONdrop">JSONdrop</a></h3>
+					<p>A JavaScript object-to-HTML5 converter.</p>
+				</div>
+				<div class="project-tile">
+					<h3><a href="https://github.com/AprilSylph/DataTheme">DataTheme</a></h3>
+					<p>Powered by JSONdrop.</p>
+				</div>
+			</div>
+		</section>
+	</body>
+	<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
